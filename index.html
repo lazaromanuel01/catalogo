@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Javascript</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        var catalogoProdutos = [];
+
+        function adicionarProduto() {
+            var nome = prompt("Digite o nome do produto:");
+            var preco = parseFloat(prompt("Digite o preço do produto:"));
+            var descricao = prompt("Digite a descrição do produto:");
+
+            var produto = {
+                nome: nome,
+                preco: preco,
+                descricao: descricao
+            };
+
+            catalogoProdutos.push(produto);
+            alert("Produto adicionado com sucesso!");
+        }
+
+        function buscarProduto() {
+            var nome = prompt("Digite o nome do produto que deseja buscar:");
+            var encontrado = false;
+
+            for (var i = 0; i < catalogoProdutos.length; i++) {
+                if (catalogoProdutos[i].nome.toLowerCase() === nome.toLowerCase()) {
+                    encontrado = true;
+                    alert("Nome: " + catalogoProdutos[i].nome + "\nPreço: " + catalogoProdutos[i].preco + "\nDescrição: " + catalogoProdutos[i].descricao);
+                    break;
+                }
+            }
+
+            if (!encontrado) {
+                alert("Produto não encontrado.");
+            }
+        }
+
+        function visualizarProdutos() {
+            if (catalogoProdutos.length === 0) {
+                alert("O catálogo de produtos está vazio.");
+            } else {
+                var listaProdutos = "Produtos Disponíveis:\n";
+                for (var i = 0; i < catalogoProdutos.length; i++) {
+                    listaProdutos += "Nome: " + catalogoProdutos[i].nome + ", Preço: " + catalogoProdutos[i].preco + ", Descrição: " + catalogoProdutos[i].descricao + "\n";
+                }
+                alert(listaProdutos);
+            }
+        }
+
+        function removerProduto() {
+            var nome = prompt("Digite o nome do produto que deseja remover:");
+            var index = -1;
+
+            for (var i = 0; i < catalogoProdutos.length; i++) {
+                if (catalogoProdutos[i].nome.toLowerCase() === nome.toLowerCase()) {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index !== -1) {
+                catalogoProdutos.splice(index, 1);
+                alert("Produto removido com sucesso!");
+            } else {
+                alert("Produto não encontrado.");
+            }
+        }
+
+        var opcao;
+        do {
+            opcao = prompt("Escolha uma opção:\n1. Adicionar Produto\n2. Buscar Produto\n3. Visualizar Todos os Produtos\n4. Remover Produto\n5. Sair");
+            switch (opcao) {
+                case "1":
+                    adicionarProduto();
+                    break;
+                case "2":
+                    buscarProduto();
+                    break;
+                case "3":
+                    visualizarProdutos();
+                    break;
+                case "4":
+                    removerProduto();
+                    break;
+                case "5":
+                    alert("Saindo do catálogo de produtos...");
+                    break;
+                default:
+                    alert("Opção inválida. Por favor, escolha uma opção válida.");
+            }
+        } while (opcao !== "5");
+    </script>
+</body>
+</html>
